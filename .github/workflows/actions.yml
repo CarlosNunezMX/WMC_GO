@@ -42,7 +42,7 @@ jobs:
           asset_path: ./WMC_GO
           asset_name: WiiUMC GO (Linux)  
       - name: Upload Windows Bin
-        id: upload-release-asset 
+        id: upload-release-asset-lin
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
