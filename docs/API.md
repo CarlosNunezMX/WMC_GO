@@ -24,6 +24,10 @@ Here is an onereview of general API of WiiUMC GO!
     This route get all content from memory and send you.\
 
     **Returns [Array from Media Type](DataTypes.md#media)**
+  + `GET /addons/online/proxy` **[Experimental]**\
+    Your computer get the media for you WiiU
+      + Query\
+        + `url string` Path where is the content online 
 
 *****
 

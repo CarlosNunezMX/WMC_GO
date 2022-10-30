@@ -17,4 +17,6 @@ func Router(app *fiber.App) {
 	addonsGroup.Get("/online", addons.GetSource)
 	addonsGroup.Post("/online/temp", addons.TempStoreOnlineMedia)
 	addonsGroup.Get("/online/temp", addons.GetTemps)
+	addonsGroup.Get("/proxy", addons.Proxy)
+
 }

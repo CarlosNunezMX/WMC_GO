@@ -2,6 +2,7 @@ package addons
 
 import (
 	"log"
+	"net/http"
 	"strings"
 
 	"github.com/CarlosNunezMX/WMC_GO/interfaces"
@@ -68,4 +69,30 @@ func TempStoreOnlineMedia(c *fiber.Ctx) error {
 
 func GetTemps(c *fiber.Ctx) error {
 	return c.JSON(OnlineTempAnime)
+}
+
+func Proxy(c *fiber.Ctx) error {
+	Url := c.Query("url")
+	println(Url)
+	if Url == "" {
+		return interfaces.ErrorHandling(c, interfaces.Error{
+			Cause: "Url is required!",
+		}, *fiber.ErrBadRequest)
+	}
+
+	req, _ := http.NewRequest(http.MethodGet, Url, nil)
+
+	req.Header.Set("Authorization", "Bearer ---------")
+	req.Header.Set("Client-ID", "---------")
+
+	client := &http.Client{}
+	res, err := client.Do(req)
+
+	if err != nil {
+		return c.SendStatus(fiber.StatusBadRequest)
+	}
+
+	c.Set("Content-Type", "application/json; charset=utf-8")
+
+	return c.Status(res.StatusCode).SendStream(res.Body)
 }
